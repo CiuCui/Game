@@ -1,0 +1,22 @@
+﻿<Window x:Name="MainWindowFrame" x:Class="MasterArbeitGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MasterArbeitGame"
+        mc:Ignorable="d"
+        Title="PerkolationsProzess" Height="689.298" Width="798.495" UseLayoutRounding="False" ResizeMode="CanResizeWithGrip" MinHeight="500" MinWidth="498" WindowState="Maximized">
+    <Grid Margin="0,0,0,0"  Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
+        <Canvas x:Name="zeichenfläche"   HorizontalAlignment="Right"   Margin="20,20,200,20" VerticalAlignment="Top" Height="700" Width="1200" RenderTransformOrigin="0.5,0.5"    />
+        <Button x:Name="buttonKonstruktion" Content="Konstruiere!" HorizontalAlignment="Right" Margin="616,281,55,0" VerticalAlignment="Top" Width="119" Click="buttonKonstruktion_Click" Height="29"/>
+        <Slider x:Name="sliderxAchse" HorizontalAlignment="Right" Margin="616,121,60,0" VerticalAlignment="Top" Width="119" Value="20" Maximum="100" Minimum="2"/>
+        <Slider x:Name="slideryAchse" HorizontalAlignment="Right" Margin="616,205,60,0" VerticalAlignment="Top" Width="119" Value="20" Maximum="100" Minimum="2"/>
+        <Label Content="Knoten auf x-Achse" HorizontalAlignment="Right" Height="24" Margin="616,92,60,0" VerticalAlignment="Top" Width="119" HorizontalContentAlignment="Right"/>
+        <Label Content="Knoten auf y-Achse" HorizontalAlignment="Right" Margin="616,174,60,0" VerticalAlignment="Top" Width="119" HorizontalContentAlignment="Right"/>
+        <Label Name="LabelsliderxAchse" Content="{Binding ElementName=sliderxAchse,Path=Value}" HorizontalAlignment="Right" Height="28" Margin="740,111,20,0" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.328,0.186" HorizontalContentAlignment="Right"/>
+        <Label x:Name="LabelslideryAchse" Content="{Binding ElementName=slideryAchse, Path=Value}" HorizontalAlignment="Right" Height="23" Margin="0,200,20,0" VerticalAlignment="Top" Width="25" HorizontalContentAlignment="Right"/>
+        <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="{Binding ElementName=MainWindowFrame, Path=Width}">
+            <MenuItem Header="Einstellungen"/>
+        </Menu>
+    </Grid>
+</Window>

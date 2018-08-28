@@ -1,0 +1,15 @@
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\bin\Debug\MasterArbeitGame.exe.config
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\bin\Debug\MasterArbeitGame.exe
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\bin\Debug\MasterArbeitGame.pdb
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\obj\Debug\MainWindow.g.cs
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\obj\Debug\App.g.cs
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\obj\Debug\MasterArbeitGame_MarkupCompile.cache
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\obj\Debug\MasterArbeitGame_MarkupCompile.lref
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\obj\Debug\MainWindow.baml
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\obj\Debug\MasterArbeitGame.g.resources
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\obj\Debug\MasterArbeitGame.Properties.Resources.resources
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\obj\Debug\MasterArbeitGame.csproj.GenerateResource.cache
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\obj\Debug\MasterArbeitGame.csproj.CoreCompileInputs.cache
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\obj\Debug\MasterArbeitGame.exe
+c:\users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\obj\Debug\MasterArbeitGame.pdb
+C:\Users\phili\source\repos\MasterArbeitGame\MasterArbeitGame\obj\Debug\MasterArbeitGame.csprojAssemblyReference.cache

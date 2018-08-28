@@ -1,0 +1,62 @@
+
+
+PerkolationsProzess
+
+Im Programm soll eine Krankheitsausbreitung modelliert werden.
+
+Auf einem beliebig großen Gitter tritt die Krankheit beim Knoten auf, der in der Mitte des Gitters liegt.
+
+Ein Knoten ist immer nur mit seinem direkt oberen, rechten, linken, unteren Nachbarn verbunden -  kann daher auch nur einen dieser Knoten infizieren.
+
+Wenn ein Knoten krank wird, so infiziert er jeden seiner Nachbarn einzeln mit einer bestimmten Wahrscheinlichkeit.
+Das ist die Übertragungswahrscheinlichkeit, derzeit auf 50% gesetzt. 
+Daher bekommt jede Kante (die Verbindung zwischen zwei Knoten) einen Zustand, ob sie offen für die Krankheit ist, oder eben nicht.
+
+Wenn der Mittelpunkt krank wird, infiziert er also mit 50% Wahrscheinlichkeit seinen rechten Nachbarn.
+Unabhängig davon ob er dies tut oder nicht, infiziert er auch seinen oberen Nachbarn mit Wahrscheinlichkeit 50%.
+usw.
+
+
+Das Programm ist so konzipiert, dass die Infizierung eines Knotens als Event fungiert.
+Findet eine Infektion statt, so wird der Eventhandler aufgerufen.
+Dieser beinhaltet aber die Methode, dass der infizierte Knoten seine Nachbarn, mit denen er eine offene Kante hat, infiziert.
+Demnach tritt direkt wieder das Event der Infizierung ein.
+Das ganze Prozedere wiederholt sich solange, bis ein infizierter Knoten keine offene Kante mehr zu einem seiner Nachbarn besitzt.
+
+
+Im Perkolationsmodell finden Übertragungen immer mit einer gewissen Verzögerung statt, bzw. es dauert einfach bis sich ein Nachbar ansteckt.
+Diese Zeit, die vergeht bis der Nachbar krank wird, habe ich auf die Kanten gelegt und als Übertragungsdauer definiert.
+Die Übertragungsdauer ist eine exponentialverteilte Zufallszahl.
+
+Für mich ist interessant, wie sich die Krankheit im zeitlichen Verlauf entwickelt, daher addiere ich alle Übertragungsdauern auf, die vergangen sind, bis der Knoten infiziert wurde.
+Auch dies habe ich über den Eventhandler gelöst und in jedem Knoten als "bisherigeZeit" gespeichert.
+
+
+Jeder Knoten beinhaltet also die Information, nach welcher Zeit er infiziert wurde.
+
+Ich habe dann für die Visualisierung Rechtecke konstruiert, die jeweils einen Knoten darstellen. 
+Um den zeitlichen Verlauf darzustellen, habe ich die "maximalebisherigeZeit" über alle Knoten abgefragt.
+Danach habe ich für jeden Knoten eine Prozentzahl errechnet mit Knoten.bisherigeZeit / maximalebisherigeZeit.
+Wenn man diese Prozentzahl mit 255 multipliziert, erhält man immer einen Wert < 255.
+
+Dieser Wert hab ich an die Grünwerte im RGB-Modus gebunden, um einen Farbverlauf zu produzieren, sodass der Knoten mit der maximalenbisherigenZeit immer gelb ist.
+Die anderen Knoten sind im Verhältnis dazu röter.
+
+
+
+WAS NOCH ZU TUN BLEIBT
+
+
+1. Rechenleistung durch MultiThreading erhöhen
+2. Jeder Knoten ist nur eine bestimmte Zeit krank. Danach ist er immun. Diesen Zustand erfassen und darstellen (bspw. grau machen), sodass man zu einem gewissen Zeitpunkt nur die Knoten anzeigt, die derzeit "krank" sind.
+3. Die Endknoten eines Pfades sind für manche Berechnungen im Modell interessant -- habe hierzu aber schon Ideen.
+4. StackOverFlow vermeiden.
+
+
+BONUS
+
+5.Unterschiedliche Anzahlen für x und y Achse zulassen
+6. Canvasgröße an MainWindowGröße binden.
+	- Könnte es an komplette Größe anbinden, aber dann bräuchte ich ein Kontextmenü, um Kontsruktion auszulösen. Hab es erstmal eingefügt..
+7. 
+
