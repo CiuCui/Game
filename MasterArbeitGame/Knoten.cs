@@ -12,7 +12,7 @@ namespace MasterArbeitGame
     {
         private int _xKoordinate;
         private int _yKoordinate;
-
+        public int nichts = 0;
         // 0 gesund, 1 infiziert, 2 immun
         private int _zustand;
         private double _infektionszeit;
@@ -24,7 +24,7 @@ namespace MasterArbeitGame
 
 
         // Zustandsveränderung
-        public static event EventHandler ZustandVerändert;
+        public static event EventHandler ZustandVerändert; // korrekturversuch
 
       
 
