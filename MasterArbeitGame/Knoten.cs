@@ -24,7 +24,7 @@ namespace MasterArbeitGame
 
 
         // Zustandsveränderung
-        public static event EventHandler ZustandVerändert; // korrekturversuch
+        public static event EventHandler ZustandVerändert; 
 
       
 
