@@ -74,7 +74,7 @@ namespace MasterArbeitGame
 
         
 
-        private void buttonKonstruktion_Click(object sender, RoutedEventArgs e)
+        private void ButtonKonstruktion_Click(object sender, RoutedEventArgs e)
         {
            // anzahlZellenBreit = (int)sliderxAchse.Value;
            // anzahlZellenHoch = (int)slideryAchse.Value;
@@ -86,7 +86,7 @@ namespace MasterArbeitGame
             Knoten NegativKnoten = new Knoten(-1, -1, -1, -1.0);
             NegativKnoten.SetInfektionszeit(-1.0);
             Knoten[] Knotenmenge = new Knoten[gesamtAnzahlKnoten];
-            Kante[,] Kantenmenge = new Kante[gesamtAnzahlKnoten, 4];
+            
 
 
 
@@ -102,24 +102,49 @@ namespace MasterArbeitGame
             {
 
                 SolidColorBrush myBrush = new SolidColorBrush();
-                var r = new Rectangle();
-                r.Width = zeichenfläche.ActualWidth / anzahlZellenBreit - 0.1;
-                r.Height = zeichenfläche.ActualHeight / anzahlZellenHoch - 0.1;
-                //r.Fill = (Knotenmenge[knoten].GetZustand() == 1) ? Brushes.Black : Brushes.Red;
-                if (Knotenmenge[knoten].GetBisherigeZeit() != 0)
+                var Rechteck = new Rectangle
                 {
-                    myBrush.Color = Color.FromRgb(190, ByteKonstruktion(Knotenmenge[knoten].GetBisherigeZeit(), MaximumBisherigeZeit(Knotenmenge)),0);
-                    r.Fill = myBrush;
+                    Width = zeichenfläche.ActualWidth / anzahlZellenBreit - 0.1,
+                    Height = zeichenfläche.ActualHeight / anzahlZellenHoch - 0.1
+                };
+                if (CheckBox_Endknoten.IsChecked.HasValue && CheckBox_Endknoten.IsChecked.Value)
+                {
+                    if (Knotenmenge[knoten].GetBisherigeZeit() != 0 && Knotenmenge[knoten].GetIstEndknoten())
+                    {
+                        myBrush.Color = Color.FromRgb(190, ByteKonstruktion(Knotenmenge[knoten].GetBisherigeZeit(), MaximumBisherigeZeit(Knotenmenge)), 0);
+                        Rechteck.Fill = myBrush;
+                    }
+                    else if (Knotenmenge[knoten].GetBisherigeZeit() != 0 && Knotenmenge[knoten].GetIstEndknoten()==false)
+                    {
+                        myBrush.Color = Color.FromRgb(100, 100, 100);
+                        Rechteck.Fill = myBrush;
+                    }
+                    else
+                    {
+                        myBrush.Color = Color.FromRgb(20, 17, 29);
+                        Rechteck.Fill = myBrush;
+                    }
                 }
                 else
                 {
-                    myBrush.Color = Color.FromRgb(20, 17, 29);
-                    r.Fill = myBrush;
+                    if (Knotenmenge[knoten].GetBisherigeZeit() != 0)
+                    {
+                        myBrush.Color = Color.FromRgb(190, ByteKonstruktion(Knotenmenge[knoten].GetBisherigeZeit(), MaximumBisherigeZeit(Knotenmenge)), 0);
+                        Rechteck.Fill = myBrush;
+                    }
+                    else
+                    {
+                        myBrush.Color = Color.FromRgb(20, 17, 29);
+                        Rechteck.Fill = myBrush;
+                    }
+                    
                 }
-                zeichenfläche.Children.Add(r);
-                Canvas.SetLeft(r, Knotenmenge[knoten].GetXKoordinate() * zeichenfläche.ActualWidth / anzahlZellenBreit);
-                Canvas.SetTop(r, Knotenmenge[knoten].GetYKoordinate() * zeichenfläche.ActualHeight / anzahlZellenHoch);
-                felder[Knotenmenge[knoten].GetYKoordinate(), Knotenmenge[knoten].GetXKoordinate()] = r;
+
+
+                zeichenfläche.Children.Add(Rechteck);
+                Canvas.SetLeft(Rechteck, Knotenmenge[knoten].GetXKoordinate() * zeichenfläche.ActualWidth / anzahlZellenBreit);
+                Canvas.SetTop(Rechteck, Knotenmenge[knoten].GetYKoordinate() * zeichenfläche.ActualHeight / anzahlZellenHoch);
+                felder[Knotenmenge[knoten].GetYKoordinate(), Knotenmenge[knoten].GetXKoordinate()] = Rechteck;
             }
 
        

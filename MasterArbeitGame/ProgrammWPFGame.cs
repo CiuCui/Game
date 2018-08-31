@@ -9,7 +9,7 @@ namespace MasterArbeitGame
     public class ProgrammWPFGame
     {
           
-        public const int _anzahlx = 100;
+        public const int _anzahlx = 40;
         public const int _anzahly = _anzahlx;
 
         private const int _gesamtAnzahlKnoten = _anzahlx * _anzahly;
@@ -50,8 +50,11 @@ namespace MasterArbeitGame
            
             Knotenmenge = Knotenkonstruieren(_anzahlx,_anzahly);
             Kantenmenge = GetKanten(_anzahly, _anzahly);
-          
-            Knoten.ZustandVerändert += KnotenZustandVerändert;
+            for (int i = 0; i < _gesamtAnzahlKnoten; i++)
+            {
+                Knotenmenge[i].ZustandVerändert += KnotenZustandVerändert;
+            }
+            
             Knotenmenge[GitterMittelPunkt()].Infiziere();
             
 
@@ -208,11 +211,14 @@ namespace MasterArbeitGame
 
         public void InfiziereNachbarn(Knoten knoten)
         {
+            int count = 0;
 
             for (int i = 0; i < 4; i++)
             {
+                
                 if (Kantenmenge[knoten.GetKnotennummer(), i].GetÜbertragungsDauer() != _geschlossen && Kantenmenge[knoten.GetKnotennummer(), i].GetEndknoten().GetZustand() == 0)
                 {
+                    
                     Kantenmenge[knoten.GetKnotennummer(), i].GetEndknoten().SetbisherigeZeit(knoten.GetBisherigeZeit() + Kantenmenge[knoten.GetKnotennummer(), i].GetÜbertragungsDauer());
 
                     //Kantenmenge[knoten.GetKnotennummer(), i].GetEndknoten().ZustandVerändert() += KnotenZustandVerändert;
@@ -224,8 +230,15 @@ namespace MasterArbeitGame
                 else
                 {
                     Kantenmenge[knoten.GetKnotennummer(), i].SetÜbertragungsDauer(_geschlossen);
+                    count++;
                 }
             }
+            if (count == 4)
+            {
+                knoten.SetIstEndknoten(true);
+            }
+
+
         }
 
 

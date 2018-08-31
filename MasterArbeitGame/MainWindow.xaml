@@ -7,16 +7,8 @@
         mc:Ignorable="d"
         Title="PerkolationsProzess" Height="689.298" Width="798.495" UseLayoutRounding="False" ResizeMode="CanResizeWithGrip" MinHeight="500" MinWidth="498" WindowState="Maximized">
     <Grid Margin="0,0,0,0"  Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
-        <Canvas x:Name="zeichenfläche"   HorizontalAlignment="Right"   Margin="20,20,200,20" VerticalAlignment="Top" Height="700" Width="1200" RenderTransformOrigin="0.5,0.5"    />
-        <Button x:Name="buttonKonstruktion" Content="Konstruiere!" HorizontalAlignment="Right" Margin="616,281,55,0" VerticalAlignment="Top" Width="119" Click="buttonKonstruktion_Click" Height="29"/>
-        <Slider x:Name="sliderxAchse" HorizontalAlignment="Right" Margin="616,121,60,0" VerticalAlignment="Top" Width="119" Value="20" Maximum="100" Minimum="2"/>
-        <Slider x:Name="slideryAchse" HorizontalAlignment="Right" Margin="616,205,60,0" VerticalAlignment="Top" Width="119" Value="20" Maximum="100" Minimum="2"/>
-        <Label Content="Knoten auf x-Achse" HorizontalAlignment="Right" Height="24" Margin="616,92,60,0" VerticalAlignment="Top" Width="119" HorizontalContentAlignment="Right"/>
-        <Label Content="Knoten auf y-Achse" HorizontalAlignment="Right" Margin="616,174,60,0" VerticalAlignment="Top" Width="119" HorizontalContentAlignment="Right"/>
-        <Label Name="LabelsliderxAchse" Content="{Binding ElementName=sliderxAchse,Path=Value}" HorizontalAlignment="Right" Height="28" Margin="740,111,20,0" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.328,0.186" HorizontalContentAlignment="Right"/>
-        <Label x:Name="LabelslideryAchse" Content="{Binding ElementName=slideryAchse, Path=Value}" HorizontalAlignment="Right" Height="23" Margin="0,200,20,0" VerticalAlignment="Top" Width="25" HorizontalContentAlignment="Right"/>
-        <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="{Binding ElementName=MainWindowFrame, Path=Width}">
-            <MenuItem Header="Einstellungen"/>
-        </Menu>
+        <Canvas x:Name="zeichenfläche"  HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="20,20,0,0"  Height="750" Width="1300" RenderTransformOrigin="0.5,0.5"    />
+        <Button x:Name="buttonKonstruktion" Content="Konstruiere Prozess" HorizontalAlignment="Right" Margin="0,74,30,0" VerticalAlignment="Top" Width="152" Click="ButtonKonstruktion_Click" Height="29"/>
+        <CheckBox x:Name="CheckBox_Endknoten" Content="Endknoten anzeigen" HorizontalAlignment="Right" Margin="0,268,30,0" VerticalAlignment="Top" Width="152"/>
     </Grid>
 </Window>

@@ -17,6 +17,7 @@ namespace MasterArbeitGame
         private int _zustand;
         private double _infektionszeit;
         private double _bisherigeZeit;
+        private bool _istEndknoten;
 
 
 
@@ -24,7 +25,7 @@ namespace MasterArbeitGame
 
 
         // Zustandsveränderung
-        public static event EventHandler ZustandVerändert; 
+        public event EventHandler ZustandVerändert; 
 
       
 
@@ -56,6 +57,7 @@ namespace MasterArbeitGame
             SetZustand(0);
             SetInfektionszeit(infektionszeit);
             SetbisherigeZeit(0.0);
+            SetIstEndknoten(false);
            
         }
 
@@ -128,7 +130,14 @@ namespace MasterArbeitGame
             return _bisherigeZeit;
         }
 
-       
+        public bool GetIstEndknoten()
+        {
+            return _istEndknoten;
+        }
+        public void SetIstEndknoten(bool istEndknotenEintragen)
+        {
+            this._istEndknoten = istEndknotenEintragen;
+        }
 
 
 
