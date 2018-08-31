@@ -48,8 +48,8 @@ namespace MasterArbeitGame
         {
             
            
-            Knotenmenge = Knotenkonstruieren(_anzahlx,_anzahly);
-            Kantenmenge = GetKanten(_anzahly, _anzahly);
+            Knotenmenge = Knotenkonstruieren(_anzahlx,_anzahly).Result;
+            Kantenmenge = GetKanten(_anzahly, _anzahly).Result;
             for (int i = 0; i < _gesamtAnzahlKnoten; i++)
             {
                 Knotenmenge[i].ZustandVerändert += KnotenZustandVerändert;
@@ -82,22 +82,24 @@ namespace MasterArbeitGame
         // Knotenkonstruktion
 
 
-         private Knoten[] Knotenkonstruieren(int anzahlKnotenxAchse, int anzahlKnotenyAchse)
-        {
-
-            for (int zeile = 0; zeile < anzahlKnotenyAchse; zeile++)
+         private async Task<Knoten[]> Knotenkonstruieren(int anzahlKnotenxAchse, int anzahlKnotenyAchse)
+         {
+            return await Task.Run(() =>
             {
-
-                for (int knotennummer = (zeile) * anzahlKnotenxAchse; knotennummer < (zeile + 1) * anzahlKnotenxAchse; knotennummer++)
+                for (int zeile = 0; zeile < anzahlKnotenyAchse; zeile++)
                 {
-                    int xKoordinate = knotennummer - zeile * anzahlKnotenxAchse;
-                    int yKoordinate = zeile;
-                    double infektionszeit =  KnopVerteilungsZahlenGeneratorInfektionszeit(_übertragungsrateAlpha, _standardabweichungÜbertragungsrate);
 
-                    Knotenmenge[knotennummer] = new Knoten(knotennummer, xKoordinate, yKoordinate, infektionszeit);
+                    for (int knotennummer = (zeile) * anzahlKnotenxAchse; knotennummer < (zeile + 1) * anzahlKnotenxAchse; knotennummer++)
+                    {
+                        int xKoordinate = knotennummer - zeile * anzahlKnotenxAchse;
+                        int yKoordinate = zeile;
+                        double infektionszeit = KnopVerteilungsZahlenGeneratorInfektionszeit(_übertragungsrateAlpha, _standardabweichungÜbertragungsrate);
+
+                        Knotenmenge[knotennummer] = new Knoten(knotennummer, xKoordinate, yKoordinate, infektionszeit);
+                    }
                 }
-            }
-            return Knotenmenge;
+                return Knotenmenge;
+            }); 
         }
 
 
@@ -160,37 +162,32 @@ namespace MasterArbeitGame
                 
 
 
-        public Kante[,] GetKanten(int anzahlZellenxAchseKante, int anzahlZellenyAchseKante)
+        public async Task<Kante[,]> GetKanten(int anzahlZellenxAchseKante, int anzahlZellenyAchseKante)
         {
-
-
-            for (int knoten = 0; knoten < anzahlZellenxAchseKante*anzahlZellenyAchseKante; knoten++)
+            return await Task.Run(() =>
             {
-                Knoten[] nachbarn = GetNachbarn(Knotenmenge[knoten], anzahlZellenxAchseKante, anzahlZellenyAchseKante);
-
-
-
-
-                 
-
-                for (int i = 0; i <= 3; i++)
+                for (int knoten = 0; knoten < anzahlZellenxAchseKante * anzahlZellenyAchseKante; knoten++)
                 {
-                    Kante[] nachbarkanten = new Kante[4];
-                    if (KanteIstOffen.Next(0, 100) < _übertragungswahrscheinlichkeit && nachbarn[i] != NegativKnoten)
+                    Knoten[] nachbarn = GetNachbarn(Knotenmenge[knoten], anzahlZellenxAchseKante, anzahlZellenyAchseKante);
+
+                    for (int i = 0; i <= 3; i++)
                     {
-                        nachbarkanten[i] = new Kante(Knotenmenge[knoten], nachbarn[i], ExponentialVerteilung(_übertragungsrateAlpha));
-                    }
-                    else
-                    {
-                        nachbarkanten[i] = new Kante(Knotenmenge[knoten], nachbarn[i], _geschlossen);
+                        Kante[] nachbarkanten = new Kante[4];
+                        if (KanteIstOffen.Next(0, 100) < _übertragungswahrscheinlichkeit && nachbarn[i] != NegativKnoten)
+                        {
+                            nachbarkanten[i] = new Kante(Knotenmenge[knoten], nachbarn[i], ExponentialVerteilung(_übertragungsrateAlpha));
+                        }
+                        else
+                        {
+                            nachbarkanten[i] = new Kante(Knotenmenge[knoten], nachbarn[i], _geschlossen);
+                        }
+
+                        Kantenmenge[knoten, i] = nachbarkanten[i];
                     }
 
-                    Kantenmenge[knoten, i] = nachbarkanten[i];
                 }
-
-            }
-            return Kantenmenge;
-
+                return Kantenmenge;
+            });
         }
 
 
